@@ -77,6 +77,20 @@ async function sendDailyMessageManually() {
     console.log('=== FIN DE L’ENVOI MANUEL ===');
 }
 
+async function sendDailyMessageForServer(guildId) {
+    const server = configManager.getServer(guildId);
+    if (!server) {
+        throw new Error('Aucun canal n’est configuré pour ce serveur. Utilisez /configurer canal.');
+    }
+
+    const date = new Date();
+    const preparation = await prepareDailyContent(date);
+    const sections = await finalizeDailyContent(preparation);
+    await sendPreparedMessage(server, sections, date);
+
+    return server;
+}
+
 const scheduler = createDailyScheduler({
     getServers: getActiveServers,
     prepare: prepareDailyContent,
@@ -105,6 +119,7 @@ module.exports = {
     getActiveServers,
     scheduler,
     sendDailyMessageManually,
+    sendDailyMessageForServer,
     sendPreparedMessage
 };
 
