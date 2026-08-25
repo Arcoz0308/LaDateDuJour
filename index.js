@@ -90,9 +90,9 @@ client.once('ready', async readyClient => {
         activities: [{ name: 'préparer le calendrier 📅', type: ActivityType.Playing }],
         status: 'online'
     });
-    commandManager.init(readyClient);
+    await commandManager.init(readyClient);
 
-    if (process.env.DEBUG_MODE === '1') {
+    if (commandManager.isDevelopmentMode()) {
         await sendDailyMessageManually();
     } else {
         scheduler.start();
