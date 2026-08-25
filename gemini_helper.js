@@ -4,7 +4,7 @@ const { parseStructuredResponse, runAIAttemptCycle } = require('./ai_validation'
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
 
 async function callGeminiAPI(prompt, date, schema) {
-    const modelName = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+    const modelName = process.env.GEMINI_MODEL || 'gemini-3.6-flash';
     
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
