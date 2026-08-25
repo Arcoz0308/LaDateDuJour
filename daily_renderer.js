@@ -100,7 +100,7 @@ function buildDailyMessages({ sections, date, roleId, botUserId }) {
                     repliedUser: false
                 }
             },
-            container({ accentColor: 0x5865F2 }, ...children)
+            ...children
         );
     });
 }
